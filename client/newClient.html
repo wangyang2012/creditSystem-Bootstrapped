@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>客户注册</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap/js/bootstrap.min.js">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap/js/bootstrap.min.js">
     <style type="text/css">
     .navbar {
         border-radius: 0
@@ -28,28 +28,20 @@
 				document.request.personName.disabled = false;
 				document.request.assets.disabled = false;
 				document.request.liabilities.disabled = false;
-				document.request.professions.disabled = false;
 				document.request.education.disabled = false;
-				document.request.spouse.disabled = false;
 				document.request.live.disabled = false;
-				document.request.insurance.disabled = false;
 				
 				document.request.enterpriseName.disabled = true;
 				document.request.finance.disabled = true;
-				document.request.business.disabled = true;
 			} else if (radio.value == "enterprise") {
 				document.request.personName.disabled = true;
 				document.request.assets.disabled = true;
 				document.request.liabilities.disabled = true;
-				document.request.professions.disabled = true;
 				document.request.education.disabled = true;
-				document.request.spouse.disabled = true;
 				document.request.live.disabled = true;
-				document.request.insurance.disabled = true;
 				
 				document.request.enterpriseName.disabled = false;
 				document.request.finance.disabled = false;
-				document.request.business.disabled = false;
 			}
 		}
 	</script>
@@ -78,7 +70,6 @@
                 <li><a href="usual/usual.html">日常管理</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                <li><a href="deconnect.php">退出</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -88,6 +79,7 @@
 <div class="container">
 	<ol class="breadcrumb">
 	  <li><a href="../home.html">主页</a></li>
+	  <li><a href="client.html">客户管理</a></li>
 	  <li class="active">客户注册</li>
 	</ol>
 		<form name="request" method="post" action="./action/newClientAction.php">
@@ -101,21 +93,57 @@
 			
 			<div id="personForm">
 			<table>
-				<tr><td>姓名</td><td><input type="text" name="personName"/></td></tr>
-				<tr><td>客户工资</td><td><input type="textarea" name="assets" rows="4" cols="50"/></td></tr>
-				<tr><td>负债情况</td><td><input type="textarea" name="liabilities" rows="4" cols="50"/></td></tr>
-				<tr><td>工作状况</td><td><input type="textarea" name="professions" rows="4" cols="50"/></td></tr>
-				<tr><td>教育经历</td><td><input type="textarea" name="education" rows="4" cols="50"/></td></tr>
-				<tr><td>婚姻状况</td><td><input type="textarea" name="spouse" rows="4" cols="50"/></td></tr>
-				<tr><td>有无子女</td><td><input type="textarea" name="live" rows="4" cols="50"/></td></tr>
-				<tr><td>居住情况</td><td><input type="textarea" name="insurance" rows="4" cols="50"/></td></tr>
+				<tr><td>姓名</td><td><input type="text" name="personName" style="width: 200px;"/></td></tr>
+				<tr><td>客户工资</td><td>
+					<select name="assets"  style="width: 200px;">
+						<option value="0"></option>
+						<option value="1">2000元以下</option>
+						<option value="2">2000-5000元</option>
+						<option value="3">5000-8000元</option>
+						<option value="4">8000元以上</option>
+					</select>
+				</td></tr>
+				<tr><td>负债情况</td><td>
+					<select name="liabilities" style="width: 200px;">
+						<option value="0"></option>
+						<option value="1">2万元以下</option>
+						<option value="2">2万元以上</option>
+						<option value="3">无</option>
+					</select>
+				</td></tr>
+				<tr><td>教育经历</td><td>
+					<select name="education" style="width: 200px;">
+						<option value="0"></option>
+						<option value="1">高中及以下</option>
+						<option value="2">专科</option>
+						<option value="3">本科</option>
+						<option value="4">硕士及以上</option>
+					</select>
+				</td></tr>
+				<tr><td>居住情况</td><td>
+					<select name="live" style="width: 200px;">
+						<option value="0"></option>
+						<option value="1">寄居</option>
+						<option value="2">租房</option>
+						<option value="3">按揭买房</option>
+						<option value="4">全款买房</option>
+					</select>
+				</td></tr>
 			</table>
 			</div>
 			<div id="enterpriseForm">
 			<table>
-				<tr><td>企业名称</td><td><input type="text" name="enterpriseName" disabled/></td></tr>
-				<tr><td>财务报表</td><td><input type="textarea" name="finance" rows="4" cols="50" disabled/></td></tr>
-				<tr><td>业务基本情况</td><td><input type="textarea" name="business" rows="4" cols="50" disabled/></td></tr>
+				<tr><td>企业名称</td><td><input type="text" name="enterpriseName" style="width: 200px;" disabled/></td></tr>
+				<tr><td>财务</td><td>
+					<select name="finance" style="width: 200px;" disabled>
+						<option value="0"></option>
+						<option value="1">盈利</option>
+						<option value="2">亏损100万以内</option>
+						<option value="3">亏损100万到150万</option>
+						<option value="4">亏损150万到200万</option>
+						<option value="5">亏损200万以上</option>
+					</select>
+				</td></tr>
 			</table>
 			</div>
 			

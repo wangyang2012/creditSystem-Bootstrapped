@@ -14,7 +14,7 @@
 			$_SESSION['userId'] = $data['id'];
 			header('Location: ./home.html');
 		} else {
-			header('Location: deconnect.php');
+			header('Location: disconnect.php');
 		}
 		mysql_close();
 	}
