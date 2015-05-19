@@ -39,7 +39,7 @@
                 <li><a href="../usual/usual.html">日常管理</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                <li><a href="deconnect.php">退出</a></li>
+                <li><a href="../disconnect.php">退出</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -50,17 +50,56 @@
 	<ol class="breadcrumb">
 	  <li><a href="../home.html">主页</a></li>
 	  <li><a href="client.html">客户管理</a></li>
-	  <li class="active">客户管理</li>
+	  <li class="active">个人客户</li>
 	</ol>
 <table  class="table">
 	<?php
-		echo '<tr><th>姓名</th><th>客户工资</th><th>负债情况</th><th>工作状况</th><th>教育经历</th><th>婚姻状况</th><th>有无子女</th><th>居住情况</th></tr>';
+		echo '<tr><th>姓名</th><th>客户工资</th><th>负债情况</th><th>教育经历</th><th>居住情况</th><th>信用等级</th></tr>';
 		$db = mysql_connect('localhost', 'root', 'root');
 		mysql_select_db('creditsystem', $db);
 		$sql = 'select * from client where client_type = 1';
 		$req = mysql_query($sql) or die('Erreur SQL: <br/>'.mysql_error());
 		while ($data = mysql_fetch_assoc($req)) {
-			echo '<tr><td>'.$data['client_name'].'</td><td>'.$data['assets'].'</td><td>'.$data['liabilities'].'</td><td>'.$data['professions'].'</td><td>'.$data['education'].'</td><td>'.$data['spouse'].'</td><td>'.$data['live'].'</td><td>'.$data['insurance'].'</td></tr>';
+			switch($data['assets']) {
+				case 1: $assets = "2000元以下"; break;
+				case 2: $assets = "2000-5000元"; break;
+				case 3: $assets = "5000-8000元"; break;
+				case 4: $assets = "8000元以上"; break;
+				default: $assets = "";
+			}
+			
+			switch($data['liabilities']) {
+				case 1: $liabilities = "2万元以下"; break;
+				case 2: $liabilities = "2万元以上"; break;
+				case 3: $liabilities = "无"; break;
+				default: $liabilities = "";
+			}
+			
+			switch($data['education']) {
+				case 1: $education = "高中及以下"; break;
+				case 2: $education = "专科"; break;
+				case 3: $education = "本科"; break;
+				case 4: $education = "硕士及以上"; break;
+				default: $education = "";
+			}
+			
+			switch($data['live']) {
+				case 1: $live = "寄居"; break;
+				case 2: $live = "租房"; break;
+				case 3: $live = "按揭买房"; break;
+				case 4: $live = "全款买房"; break;
+				default: $live = "";
+			}
+			
+			switch($data['level']) {
+				case 1: $level = "正常"; break;
+				case 2: $level = "关注"; break;
+				case 3: $level = "次级"; break;
+				case 4: $level = "可疑"; break;
+				case 5: $level = "损失"; break;
+				default: $level = "";
+			}
+			echo '<tr><td>'.$data['client_name'].'</td><td>'.$assets.'</td><td>'.$liabilities.'</td><td>'.$education.'</td><td>'.$live.'</td><td>'.$level.'</td></tr>';
 		}
 		mysql_close();
 	?>

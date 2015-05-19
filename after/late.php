@@ -39,7 +39,7 @@
                 <li><a href="../usual/usual.html">日常管理</a></li>
             </ul>
             <ul class="nav navbar-nav pull-right">
-                <li><a href="deconnect.php">退出</a></li>
+                <li><a href="../disconnect.php">退出</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -62,7 +62,7 @@
 		</thead>
 		<tbody>
 				<?php
-				$db = mysql_connect ( 'localhost', 'root', 'root' );
+				$db = mysql_connect('localhost', 'root', 'root');
 				mysql_select_db ( 'creditsystem', $db );
 				$sql = 'select distribution_id, client_name, client_type, amount, duration, date, (EXTRACT(YEAR FROM now()) - EXTRACT(YEAR FROM `date`)) as diff  from distribution join client on client.client_id = distribution.client_id where (EXTRACT(YEAR FROM now()) - EXTRACT(YEAR FROM `date`)) > duration';
 				$req = mysql_query ( $sql ) or die ( 'Erreur SQL: <br/>' . mysql_error () );

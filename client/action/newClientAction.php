@@ -7,17 +7,28 @@ header("Content-type: text/html; charset=utf-8");
 		$name = $_POST['personName'];
 		$assets = $_POST['assets'];
 		$liabilities = $_POST['liabilities'];
-		$professions = $_POST['professions'];
 		$education = $_POST['education'];
-		$spouse = $_POST['spouse'];
 		$live = $_POST['live'];
-		$insurance = $_POST['insurance'];
-		$sql = "INSERT INTO `creditsystem`.`client` (`client_name`, `client_type`, `assets`, `liabilities`, `professions`, `education`, `spouse`, `live`, `insurance`, `finance`, `business`, `level`) VALUES ('".$name."', 1, '".$assets."', '".$liabilities."', '".$professions."', '".$education."', '".$spouse."', '".$live."', '".$insurance."', '', '', '1');";
+		
+		$score = $assets + $liabilities + $education + $live;
+		if ($score < 6)
+			$level = 5;
+		else if ($score >= 6 and $score <= 7)
+			$level = 4;
+		else if ($score >= 8 and $score <= 9)
+			$level = 3;
+		else if ($score >= 10 and $score <= 13)
+			$level = 2;
+		else if ($score >= 14 and $score <= 17)
+			$level = 1;
+
+		$sql = "INSERT INTO `creditsystem`.`client` (`client_name`, `client_type`, `assets`, `liabilities`, `education`, `live`, `level`) VALUES ('".$name."', 1, '".$assets."', '".$liabilities."', '".$education."', '".$live."', '".$level."');";
 	} else if ($type == 'enterprise') {
 		$name = $_POST['enterpriseName'];
 		$finance = $_POST['finance'];
-		$business = $_POST['business'];
-		$sql = "INSERT INTO `creditsystem`.`client` (`client_name`, `client_type`, `assets`, `liabilities`, `professions`, `education`, `spouse`, `live`, `insurance`, `finance`, `business`, `level`) VALUES ('".$name."', 2, '', '', '', '', '', '', '', '".$finance."', '".$business."', '1');";
+		$level = $finance;
+		
+		$sql = "INSERT INTO `creditsystem`.`client` (`client_name`, `client_type`, `finance`, `level`) VALUES ('".$name."', 2, '".$finance."', '".$level."');";
 	}
 	$result = mysql_query($sql) or die('Erreur SQL: <br/>'.mysql_error());
 	echo '<script>
